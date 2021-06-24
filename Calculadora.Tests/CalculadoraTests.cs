@@ -25,5 +25,15 @@ namespace Calculadora.Tests
 
             Assert.AreEqual(3, resultado);
         }
+
+        [Test]
+        public void DividePorZero()
+        {
+            var calculadora = new Calculadora();
+
+            var resultado = calculadora.Divide(15, 0);
+
+            Assert.AreEqual(double.NaN, resultado);
+        }
     }
 }

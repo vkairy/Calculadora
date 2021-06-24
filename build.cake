@@ -1,6 +1,6 @@
-#tool "nuget:?package=OpenCover"
-#tool "nuget:?package=NUnit.ConsoleRunner"
-#tool "nuget:?package=ReportGenerator"
+#tool "nuget:?package=OpenCover&version=4.7.1221"
+#tool "nuget:?package=NUnit.ConsoleRunner&version=3.12.0"
+#tool "nuget:?package=ReportGenerator&version=4.8.11"
 
 var target = Argument("target", "Default");
 
@@ -48,10 +48,11 @@ Task("ReportGenerator")
     {
         var reportGeneratorSettings = new ReportGeneratorSettings()
         {
-            HistoryDirectory = new DirectoryPath("./GeneratedReports/ReportsHistory")
+            HistoryDirectory = new DirectoryPath("./GeneratedReports/ReportsHistory"),
+            ToolPath = new FilePath("./tools/ReportGenerator.4.8.11/tools/net47/reportgenerator.exe")
         };
 
-        ReportGenerator("./GeneratedReports/CalculadoraReport.xml", "./GeneratedReports/ReportGeneratorOutput", reportGeneratorSettings);
+        ReportGenerator(new FilePath("./GeneratedReports/CalculadoraReport.xml"), "./GeneratedReports/ReportGeneratorOutput", reportGeneratorSettings);
     });
 
 Task("Default")
