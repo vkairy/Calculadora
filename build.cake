@@ -4,7 +4,14 @@
 
 var target = Argument("target", "Default");
 
+Task("NugetRestore")
+    .Does(() =>
+    {
+        NuGetRestore("./Calculadora.sln");
+    });
+
 Task("BuildTest")
+    .IsDependentOn("NugetRestore")
     .Does(() => 
     {
         MSBuild("./Calculadora.Tests/Calculadora.Tests.csproj", 
